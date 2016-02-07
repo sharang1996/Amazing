@@ -25,7 +25,7 @@ public class Test extends Activity {
             //l.setBackgroundResource(R.drawable.mainsplash);
             l.setBackgroundColor(Color.BLUE);
             TextView tv=(TextView)findViewById(R.id.tv);
-            tv.setText("Clue11111111111111111111111111111111111111111111111111111111111111111111111");
+            tv.setText("Clue1111111111111111111111111111111111111111111111111111111111");
             tv.setTextColor(Color.WHITE);
 
         }
