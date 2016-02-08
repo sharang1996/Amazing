@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Amazing</string>
     <string name="action_settings">Settings</string>
+    <string name="jack_desc">Captain of the Black Pearl and legendary pirate of the Seven Seas, Captain Jack Sparrow is the irreverent trickster of the Caribbean.</string>
+    <string name="final_desc">Play to save your friends from Death himself!!You get a premonition of the death of your friends...Its a race against time!!</string>
+    <string name="harry_desc">Harry Potter is The Boy Who Lived, singled out by Lord Voldemort at birth to be his greatest rival, and our hero!!Play as Harry and rscue the world from the wrath of Voldemort!!!</string>
+    <string name="sherlock_desc">A London-based \"consulting detective\" whose abilities border on the fantastic, Holmes is known for his astute logical reasoning, his ability to adopt almost any disguise, and his use of forensic science to solve difficult cases.Play as Sherlock and match your wits against your greatest rival of all time!!!</string>
 </resources>

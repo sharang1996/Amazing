@@ -13,7 +13,7 @@
         <activity
             android:name=".MainSplash"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,7 +24,7 @@
         <activity
             android:name=".ChooseStoryLine"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
                 <action android:name="test.sharang.com.amazing.ChooseStoryLine" />
 
@@ -36,7 +36,7 @@
         <activity
             android:name=".FdSplash"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
                 <action android:name="test.sharang.com.amazing.FdSplash" />
 
@@ -47,7 +47,7 @@
         <activity
             android:name=".HpSplash"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
                 <action android:name="test.sharang.com.amazing.HpSplash" />
 
@@ -58,7 +58,7 @@
         <activity
             android:name=".PocSplash"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
                 <action android:name="test.sharang.com.amazing.PocSplash" />
 
@@ -69,7 +69,7 @@
         <activity
             android:name=".SlSplash"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
                 <action android:name="test.sharang.com.amazing.SlSplash" />
 
@@ -91,7 +91,7 @@
         <activity
             android:name=".FdClue"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
                 <action android:name="test.sharang.com.amazing.FdClue" />
 
@@ -102,7 +102,7 @@
         <activity
             android:name=".HpClue"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
                 <action android:name="test.sharang.com.amazing.HpClue" />
 
@@ -113,7 +113,7 @@
         <activity
             android:name=".PocClue"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
                 <action android:name="test.sharang.com.amazing.PocClue" />
 
@@ -124,7 +124,7 @@
         <activity
             android:name=".SlClue"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
                 <action android:name="test.sharang.com.amazing.SlClue" />
 
