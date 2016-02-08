@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-
 import java.util.List;
 
 public class WifiSearcher extends AppCompatActivity{
@@ -33,7 +32,7 @@ public class WifiSearcher extends AppCompatActivity{
     String wh[]={"HostelF","1","2","3","4","5","6","7","8","9","10","11","12","13","14"};  //this is the ssid list we create
     //this has to be set according to the room names!!!
 
-    int set[]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};   //this determines wether the ssid is unlocked
+    int set[]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};   //this determines whether the ssid is unlocked
 
     SharedPreferences preferences;              //we use this for saving the ssid set or not details in shared prefs
     SharedPreferences.Editor editor;
@@ -178,7 +177,7 @@ public class WifiSearcher extends AppCompatActivity{
                                 set[0] = 1;
                                 editor.putInt("set0", set[0]);
                                 editor.commit();
-                                Intent x= new Intent("test.sharang.com.amazing.Test");
+                                Intent x= new Intent("test.sharang.com.amazing.PocClue");
                                 x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
