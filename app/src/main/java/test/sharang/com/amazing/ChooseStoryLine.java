@@ -37,26 +37,32 @@ public class ChooseStoryLine extends Activity implements View.OnClickListener{
         switch(id)
         {
             case R.id.poc:
-                i=new Intent("test.sharang.com.amazing.");
+                i=new Intent("test.sharang.com.amazing.PocSplash");
                 startActivity(i);
                 break;
 
             case R.id.hp:
-                i=new Intent("test.sharang.com.amazing.");
+                i=new Intent("test.sharang.com.amazing.HpSplash");
                 startActivity(i);
                 break;
 
             case R.id.fd:
-                i=new Intent("test.sharang.com.amazing.");
+                i=new Intent("test.sharang.com.amazing.FdSplash");
                 startActivity(i);
                 break;
 
             case R.id.sl:
-                i=new Intent("test.sharang.com.amazing.");
+                i=new Intent("test.sharang.com.amazing.SlSplash");
                 startActivity(i);
                 break;
         }
 
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
     }
 }

@@ -23,21 +23,30 @@ import java.util.List;
 
 public class WifiSearcher extends AppCompatActivity{
 
-    WifiManager wifi;
-    String wifis[];
-    WifiScanReceiver wifiReciever;
-    int credits=0;
-    String wh[]={"HostelF","1","2","3","4","5","6","7","8","9","10","11","12","13","14"};
-    int set[]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-    SharedPreferences preferences;
+
+    int choice=0;                     //this holds the user storyline choice
+    WifiManager wifi;                 //this is the wifiManager object
+    String ssids[];                   //this will hold the array list of wifi networks available
+    WifiScanReceiver wifiReciever;    //this is the broadcast reciever class object
+    int credits=0;                    //this is the in-game credits
+
+    String wh[]={"HostelF","1","2","3","4","5","6","7","8","9","10","11","12","13","14"};  //this is the ssid list we create
+    //this has to be set according to the room names!!!
+
+    int set[]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};   //this determines wether the ssid is unlocked
+
+    SharedPreferences preferences;              //we use this for saving the ssid set or not details in shared prefs
     SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_searcher);
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
@@ -49,15 +58,19 @@ public class WifiSearcher extends AppCompatActivity{
             }
         });
 
+        Intent i =getIntent();
+        choice=i.getIntExtra("choice",0);            //we get the user choice of storyline
 
-        wifi=(WifiManager)getSystemService(Context.WIFI_SERVICE);
-        wifiReciever = new WifiScanReceiver();
-        wifi.startScan();
+
+        wifi=(WifiManager)getSystemService(Context.WIFI_SERVICE);  //initialing the wifimanager object
+        wifiReciever = new WifiScanReceiver();                     //initializing the broadcast reciever
+        wifi.startScan();                                          //we begin to scan for networks
 
 
         preferences=getApplicationContext().getSharedPreferences("xyz",MODE_PRIVATE);
         editor = preferences.edit();
-        set[0]=preferences.getInt("set0", 0);
+
+        set[0]=preferences.getInt("set0", 0);                                //setting all ssids to 0 by default
         set[1]=preferences.getInt("set1",0);
         set[2]=preferences.getInt("set2",0);
         set[3]=preferences.getInt("set3",0);
@@ -82,7 +95,7 @@ public class WifiSearcher extends AppCompatActivity{
     protected void onResume() {
         registerReceiver(wifiReciever, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
         super.onResume();
-        wifi.startScan();
+        wifi.startScan();                        //start scanning for wifi hotspots
         set[0]=preferences.getInt("set0",0);
         set[1]=preferences.getInt("set1",0);
         set[2]=preferences.getInt("set2",0);
@@ -130,294 +143,303 @@ public class WifiSearcher extends AppCompatActivity{
 
 
         public void onReceive(Context c, Intent intent) {
-            List<ScanResult> wifiScanList = wifi.getScanResults();
-            ScanResult result[]=wifiScanList.toArray(new ScanResult[wifiScanList.size()]);
-            wifis = new String[wifiScanList.size()];
+
+            List<ScanResult> wifiScanList = wifi.getScanResults();     //listArray of all the wifi hotspots
+
+            ScanResult result[]=wifiScanList.toArray(new ScanResult[wifiScanList.size()]);  //getting an array from list
+
+            ssids = new String[wifiScanList.size()];               //stores the ssid
 
             for(int i = 0; i < wifiScanList.size(); i++){
+
                 //  wifis[i] = ((wifiScanList.get(i)).toString());
-                wifis[i] = ((result[i].SSID));
+
+                ssids[i] = ((result[i].SSID));                 //extracting ssid from result of wifi scan
+
             }
 
-            //Log.v("string",wifis[0]);
-
-            for (int i=0;i<wifis.length;++i){
-
-                if(wifis[i].contentEquals(wh[0])) {
-                    if(set[0]==0)
-                    {
-                        //TextView tv = new TextView(WifiSearcher.this);
-                        // tv.setText("You have just unlocked a clue!!!check it now!!");
-                        Dialog dialog = new Dialog(WifiSearcher.this);
-                        dialog.setTitle("Congrats!!!");
-                        dialog.setContentView(R.layout.dialoguebox);
-                        dialog.show();
-
-                        set[0] = 1;
-                        editor.putInt("set0", set[0]);
-                        editor.commit();
-                        Intent x= new Intent("test.sharang.com.amazing.Test");
-                        x.putExtra("cluearray",set);
-                        startActivity(x);
-                    }
 
 
 
-                }
+            switch(choice)                //different clue spots for different storylines...
+            {
+                case 0:
+                    for(int i=0;i<ssids.length;++i){
 
-                else
-                if(wifis[i].contentEquals(wh[1])&&set[0]==1){
-                    if(set[1]==0)
-                    {
-                        TextView tv = new TextView(WifiSearcher.this);
-                        tv.setText("You have just unlocked a clue!!!check it now!!");
-                        Dialog dialog = new Dialog(WifiSearcher.this);
-                        dialog.setTitle("Congrats!!!");
-                        dialog.setContentView(tv);
-                        dialog.show();
-                        Intent x= new Intent("test.sharang.com.amazing.Test");
-                        startActivity(x);
-                    }
-                    set[1]=1;
-                    editor.putInt("set1", set[1]);
-                    editor.commit();
+                        if(ssids[i].contentEquals(wh[0])) {
+                            if(set[0]==0)
+                            {
 
+                                Dialog dialog = new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(R.layout.dialoguebox);
+                                dialog.show();
 
-                }
-                else
-                if(wifis[i].contentEquals(wh[2])&&set[1]==1) {
-                    if(set[2]==0)
-                    {
-                        TextView tv = new TextView(WifiSearcher.this);
-                        tv.setText("You have just unlocked a clue!!!check it now!!");
-                        Dialog dialog =new Dialog(WifiSearcher.this);
-                        dialog.setTitle("Congrats!!!");
-                        dialog.setContentView(tv);
-                        dialog.show();
-                        Intent x=new Intent("com.example.aishwarya.a_mazing.Clue3");
-                        startActivity(x);
-                    }
-                    set[2] = 1;
-
-                    editor.putInt("set2", set[2]);
-                    editor.commit();
-
-                }
-                else
-                if(wifis[i].contentEquals(wh[3])&&set[2]==1) {
-                    if(set[3]==0)
-                    {
-                        TextView tv = new TextView(WifiSearcher.this);
-                        tv.setText("You have just unlocked a clue!!!check it now!!");
-                        Dialog dialog =new Dialog(WifiSearcher.this);
-                        dialog.setTitle("Congrats!!!");
-                        dialog.setContentView(tv);
-                        dialog.show();
-                        Intent x=new Intent("com.example.aishwarya.a_mazing.Clue4");
-                        startActivity(x);
-                    }
-                    set[3] = 1;
-                    editor.putInt("set3", set[3]);
-                    editor.commit();
+                                set[0] = 1;
+                                editor.putInt("set0", set[0]);
+                                editor.commit();
+                                Intent x= new Intent("test.sharang.com.amazing.Test");
+                                x.putExtra("cluearray",set);
+                                startActivity(x);
+                            }
 
 
-                }
 
-                else
-                if(wifis[i].contentEquals(wh[4])&&set[3]==1) {
-                    if(set[4]==0)
-                    {
-                        TextView tv = new TextView(WifiSearcher.this);
-                        tv.setText("You have just unlocked a clue!!!check it now!!");
-                        Dialog dialog =new Dialog(WifiSearcher.this);
-                        dialog.setTitle("Congrats!!!");
-                        dialog.setContentView(tv);
-                        dialog.show();
-                        Intent x= new Intent("com.example.aishwarya.a_mazing.Clue5");
-                        startActivity(x);
-                    }
-                    set[4] = 1;
+                        }
 
-                    editor.putInt("set4", set[4]);
-                    editor.commit();
+                        else
+                        if(ssids[i].contentEquals(wh[1])&&set[0]==1){
+                            if(set[1]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog = new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x= new Intent("test.sharang.com.amazing.Test");
+                                startActivity(x);
+                            }
+                            set[1]=1;
+                            editor.putInt("set1", set[1]);
+                            editor.commit();
 
-                }
 
-                else
-                if(wifis[i].contentEquals(wh[5])&&set[4]==1) {
-                    if(set[5]==0)
-                    {
-                        TextView tv = new TextView(WifiSearcher.this);
-                        tv.setText("You have just unlocked a clue!!!check it now!!");
-                        Dialog dialog =new Dialog(WifiSearcher.this);
-                        dialog.setTitle("Congrats!!!");
-                        dialog.setContentView(tv);
-                        dialog.show();
-                        Intent x=new Intent("com.example.aishwarya.a_mazing.Clue6");
-                        startActivity(x);
-                    }
-                    set[5] = 1;
-                    credits+=10;
-                    editor.putInt("set5", set[5]);
-                    editor.commit();
+                        }
+                        else
+                        if(ssids[i].contentEquals(wh[2])&&set[1]==1) {
+                            if(set[2]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue3");
+                                startActivity(x);
+                            }
+                            set[2] = 1;
 
-                }
-                else
-                if(wifis[i].contentEquals(wh[6])&&set[5]==1) {
-                    if(set[6]==0)
-                    {
-                        TextView tv = new TextView(WifiSearcher.this);
-                        tv.setText("You have just unlocked a clue!!!check it now!!");
-                        Dialog dialog =new Dialog(WifiSearcher.this);
-                        dialog.setTitle("Congrats!!!");
-                        dialog.setContentView(tv);
-                        dialog.show();
-                        Intent x=new Intent("com.example.aishwarya.a_mazing.Clue7");
-                        startActivity(x);
-                    }
-                    set[6] = 1;
-                    credits+=10;
-                    editor.putInt("set6", set[6]);
-                    editor.commit();
+                            editor.putInt("set2", set[2]);
+                            editor.commit();
 
-                }
-                else
-                if(wifis[i].contentEquals(wh[7])&&set[6]==1) {
-                    if(set[7]==0)
-                    {
-                        TextView tv = new TextView(WifiSearcher.this);
-                        tv.setText("You have just unlocked a clue!!!check it now!!");
-                        Dialog dialog =new Dialog(WifiSearcher.this);
-                        dialog.setTitle("Congrats!!!");
-                        dialog.setContentView(tv);
-                        dialog.show();
-                        Intent x=new Intent("com.example.aishwarya.a_mazing.Clue8");
-                        startActivity(x);
-                    }
-                    set[7] = 1;
-                    credits+=10;
-                    editor.putInt("set7", set[7]);
-                    editor.commit();
+                        }
+                        else
+                        if(ssids[i].contentEquals(wh[3])&&set[2]==1) {
+                            if(set[3]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue4");
+                                startActivity(x);
+                            }
+                            set[3] = 1;
+                            editor.putInt("set3", set[3]);
+                            editor.commit();
 
-                }
-                else
-                if(wifis[i].contentEquals(wh[8])&&set[7]==1) {
-                    if(set[8]==0)
-                    {
-                        TextView tv = new TextView(WifiSearcher.this);
-                        tv.setText("You have just unlocked a clue!!!check it now!!");
-                        Dialog dialog =new Dialog(WifiSearcher.this);
-                        dialog.setTitle("Congrats!!!");
-                        dialog.setContentView(tv);
-                        dialog.show();
-                        Intent x=new Intent("com.example.aishwarya.a_mazing.Clue8");
-                        startActivity(x);
-                    }
-                    set[8] = 1;
-                    credits+=10;
-                    editor.putInt("set8", set[8]);
-                    editor.commit();
 
-                }
+                        }
 
-                else
-                if(wifis[i].contentEquals(wh[9])&&set[8]==1) {
-                    if(set[9]==0)
-                    {
-                        TextView tv = new TextView(WifiSearcher.this);
-                        tv.setText("You have just unlocked a clue!!!check it now!!");
-                        Dialog dialog =new Dialog(WifiSearcher.this);
-                        dialog.setTitle("Congrats!!!");
-                        dialog.setContentView(tv);
-                        dialog.show();
-                        Intent x=new Intent("com.example.aishwarya.a_mazing.Clue8");
-                        startActivity(x);
-                    }
-                    set[9] = 1;
-                    credits+=10;
-                    editor.putInt("set9", set[9]);
-                    editor.commit();
+                        else
+                        if(ssids[i].contentEquals(wh[4])&&set[3]==1) {
+                            if(set[4]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x= new Intent("com.example.aishwarya.a_mazing.Clue5");
+                                startActivity(x);
+                            }
+                            set[4] = 1;
 
-                }
-                else
-                if(wifis[i].contentEquals(wh[10])&&set[9]==1) {
-                    if(set[10]==0)
-                    {
-                        TextView tv = new TextView(WifiSearcher.this);
-                        tv.setText("You have just unlocked a clue!!!check it now!!");
-                        Dialog dialog =new Dialog(WifiSearcher.this);
-                        dialog.setTitle("Congrats!!!");
-                        dialog.setContentView(tv);
-                        dialog.show();
-                        Intent x=new Intent("com.example.aishwarya.a_mazing.Clue9");
-                        startActivity(x);
-                    }
-                    set[10] = 1;
-                    credits+=10;
-                    editor.putInt("set10", set[10]);
-                    editor.commit();
+                            editor.putInt("set4", set[4]);
+                            editor.commit();
 
-                }
-                else
-                if(wifis[i].contentEquals(wh[11])&&set[10]==1) {
-                    if(set[11]==0)
-                    {
-                        TextView tv = new TextView(WifiSearcher.this);
-                        tv.setText("You have just unlocked a clue!!!check it now!!");
-                        Dialog dialog =new Dialog(WifiSearcher.this);
-                        dialog.setTitle("Congrats!!!");
-                        dialog.setContentView(tv);
-                        dialog.show();
-                        Intent x=new Intent("com.example.aishwarya.a_mazing.Clue10");
-                        startActivity(x);
-                    }
-                    set[11] = 1;
-                    credits+=15;
-                    editor.putInt("set11", set[11]);
-                    editor.commit();
+                        }
 
-                }
-                else
-                if(wifis[i].contentEquals(wh[12])&&set[11]==1) {
-                    if(set[12]==0)
-                    {
-                        TextView tv = new TextView(WifiSearcher.this);
-                        tv.setText("You have just unlocked a clue!!!check it now!!");
-                        Dialog dialog =new Dialog(WifiSearcher.this);
-                        dialog.setTitle("Congrats!!!");
-                        dialog.setContentView(tv);
-                        dialog.show();
-                        Intent x=new Intent("com.example.aishwarya.a_mazing.Clue11");
-                        startActivity(x);
-                    }
-                    set[12] = 1;
-                    credits+=15;
-                    editor.putInt("set12", set[12]);
-                    editor.commit();
+                        else
+                        if(ssids[i].contentEquals(wh[5])&&set[4]==1) {
+                            if(set[5]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue6");
+                                startActivity(x);
+                            }
+                            set[5] = 1;
+                            credits+=10;
+                            editor.putInt("set5", set[5]);
+                            editor.commit();
 
-                }
-                else
-                if(wifis[i].contentEquals(wh[13])&&set[12]==1) {
-                    if(set[13]==0)
-                    {
-                        TextView tv = new TextView(WifiSearcher.this);
-                        tv.setText("You have just unlocked a clue!!!check it now!!");
-                        Dialog dialog =new Dialog(WifiSearcher.this);
-                        dialog.setTitle("Congrats!!!");
-                        dialog.setContentView(tv);
-                        dialog.show();
-                        Intent x=new Intent("com.example.aishwarya.a_mazing.Clue12");
-                        startActivity(x);
-                    }
-                    set[13] = 1;
-                    credits+=15;
-                    editor.putInt("set13", set[13]);
-                    editor.commit();
+                        }
+                        else
+                        if(ssids[i].contentEquals(wh[6])&&set[5]==1) {
+                            if(set[6]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue7");
+                                startActivity(x);
+                            }
+                            set[6] = 1;
+                            credits+=10;
+                            editor.putInt("set6", set[6]);
+                            editor.commit();
 
-                }
+                        }
+                        else
+                        if(ssids[i].contentEquals(wh[7])&&set[6]==1) {
+                            if(set[7]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue8");
+                                startActivity(x);
+                            }
+                            set[7] = 1;
+                            credits+=10;
+                            editor.putInt("set7", set[7]);
+                            editor.commit();
+
+                        }
+                        else
+                        if(ssids[i].contentEquals(wh[8])&&set[7]==1) {
+                            if(set[8]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue8");
+                                startActivity(x);
+                            }
+                            set[8] = 1;
+                            credits+=10;
+                            editor.putInt("set8", set[8]);
+                            editor.commit();
+
+                        }
+
+                        else
+                        if(ssids[i].contentEquals(wh[9])&&set[8]==1) {
+                            if(set[9]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue8");
+                                startActivity(x);
+                            }
+                            set[9] = 1;
+                            credits+=10;
+                            editor.putInt("set9", set[9]);
+                            editor.commit();
+
+                        }
+                        else
+                        if(ssids[i].contentEquals(wh[10])&&set[9]==1) {
+                            if(set[10]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue9");
+                                startActivity(x);
+                            }
+                            set[10] = 1;
+                            credits+=10;
+                            editor.putInt("set10", set[10]);
+                            editor.commit();
+
+                        }
+                        else
+                        if(ssids[i].contentEquals(wh[11])&&set[10]==1) {
+                            if(set[11]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue10");
+                                startActivity(x);
+                            }
+                            set[11] = 1;
+                            credits+=15;
+                            editor.putInt("set11", set[11]);
+                            editor.commit();
+
+                        }
+                        else
+                        if(ssids[i].contentEquals(wh[12])&&set[11]==1) {
+                            if(set[12]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue11");
+                                startActivity(x);
+                            }
+                            set[12] = 1;
+                            credits+=15;
+                            editor.putInt("set12", set[12]);
+                            editor.commit();
+
+                        }
+                        else
+                        if(ssids[i].contentEquals(wh[13])&&set[12]==1) {
+                            if(set[13]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue12");
+                                startActivity(x);
+                            }
+                            set[13] = 1;
+                            credits+=15;
+                            editor.putInt("set13", set[13]);
+                            editor.commit();
+
+                        }
 
               /*  else
-                if(wifis[i].contentEquals(wh[14])&&set[13]==1) {
+                if(ssids[i].contentEquals(wh[14])&&set[13]==1) {
                     if(set[14]==0)
                     {
                         TextView tv = new TextView(WifiSearcher.this);
@@ -432,7 +454,946 @@ public class WifiSearcher extends AppCompatActivity{
                     editor.commit();
 
                 }*/
+                    }
+
+
+
+
+
+
+
+
+                    break;
+
+
+
+
+
+                case 1:
+
+
+                    for(int i=0;i<ssids.length;++i){
+
+                        if(ssids[i].contentEquals(wh[0])) {
+                            if(set[0]==0)
+                            {
+
+                                Dialog dialog = new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(R.layout.dialoguebox);
+                                dialog.show();
+
+                                set[0] = 1;
+                                editor.putInt("set0", set[0]);
+                                editor.commit();
+                                Intent x= new Intent("test.sharang.com.amazing.Test");
+                                x.putExtra("cluearray",set);
+                                startActivity(x);
+                            }
+
+
+
+                        }
+
+                        else
+                        if(ssids[i].contentEquals(wh[1])&&set[0]==1){
+                            if(set[1]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog = new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x= new Intent("test.sharang.com.amazing.Test");
+                                startActivity(x);
+                            }
+                            set[1]=1;
+                            editor.putInt("set1", set[1]);
+                            editor.commit();
+
+
+                        }
+                        else
+                        if(ssids[i].contentEquals(wh[2])&&set[1]==1) {
+                            if(set[2]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue3");
+                                startActivity(x);
+                            }
+                            set[2] = 1;
+
+                            editor.putInt("set2", set[2]);
+                            editor.commit();
+
+                        }
+                        else
+                        if(ssids[i].contentEquals(wh[3])&&set[2]==1) {
+                            if(set[3]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue4");
+                                startActivity(x);
+                            }
+                            set[3] = 1;
+                            editor.putInt("set3", set[3]);
+                            editor.commit();
+
+
+                        }
+
+                        else
+                        if(ssids[i].contentEquals(wh[4])&&set[3]==1) {
+                            if(set[4]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x= new Intent("com.example.aishwarya.a_mazing.Clue5");
+                                startActivity(x);
+                            }
+                            set[4] = 1;
+
+                            editor.putInt("set4", set[4]);
+                            editor.commit();
+
+                        }
+
+                        else
+                        if(ssids[i].contentEquals(wh[5])&&set[4]==1) {
+                            if(set[5]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue6");
+                                startActivity(x);
+                            }
+                            set[5] = 1;
+                            credits+=10;
+                            editor.putInt("set5", set[5]);
+                            editor.commit();
+
+                        }
+                        else
+                        if(ssids[i].contentEquals(wh[6])&&set[5]==1) {
+                            if(set[6]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue7");
+                                startActivity(x);
+                            }
+                            set[6] = 1;
+                            credits+=10;
+                            editor.putInt("set6", set[6]);
+                            editor.commit();
+
+                        }
+                        else
+                        if(ssids[i].contentEquals(wh[7])&&set[6]==1) {
+                            if(set[7]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue8");
+                                startActivity(x);
+                            }
+                            set[7] = 1;
+                            credits+=10;
+                            editor.putInt("set7", set[7]);
+                            editor.commit();
+
+                        }
+                        else
+                        if(ssids[i].contentEquals(wh[8])&&set[7]==1) {
+                            if(set[8]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue8");
+                                startActivity(x);
+                            }
+                            set[8] = 1;
+                            credits+=10;
+                            editor.putInt("set8", set[8]);
+                            editor.commit();
+
+                        }
+
+                        else
+                        if(ssids[i].contentEquals(wh[9])&&set[8]==1) {
+                            if(set[9]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue8");
+                                startActivity(x);
+                            }
+                            set[9] = 1;
+                            credits+=10;
+                            editor.putInt("set9", set[9]);
+                            editor.commit();
+
+                        }
+                        else
+                        if(ssids[i].contentEquals(wh[10])&&set[9]==1) {
+                            if(set[10]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue9");
+                                startActivity(x);
+                            }
+                            set[10] = 1;
+                            credits+=10;
+                            editor.putInt("set10", set[10]);
+                            editor.commit();
+
+                        }
+                        else
+                        if(ssids[i].contentEquals(wh[11])&&set[10]==1) {
+                            if(set[11]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue10");
+                                startActivity(x);
+                            }
+                            set[11] = 1;
+                            credits+=15;
+                            editor.putInt("set11", set[11]);
+                            editor.commit();
+
+                        }
+                        else
+                        if(ssids[i].contentEquals(wh[12])&&set[11]==1) {
+                            if(set[12]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue11");
+                                startActivity(x);
+                            }
+                            set[12] = 1;
+                            credits+=15;
+                            editor.putInt("set12", set[12]);
+                            editor.commit();
+
+                        }
+                        else
+                        if(ssids[i].contentEquals(wh[13])&&set[12]==1) {
+                            if(set[13]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue12");
+                                startActivity(x);
+                            }
+                            set[13] = 1;
+                            credits+=15;
+                            editor.putInt("set13", set[13]);
+                            editor.commit();
+
+                        }
+
+              /*  else
+                if(ssids[i].contentEquals(wh[14])&&set[13]==1) {
+                    if(set[14]==0)
+                    {
+                        TextView tv = new TextView(WifiSearcher.this);
+                        tv.setText("You have just unlocked a clue!!!check it now!!");
+                        Dialog dialog =new Dialog(WifiSearcher.this);
+                        dialog.setTitle("Congrats!!!");
+                        dialog.setContentView(tv);
+                        dialog.show();
+                    }
+                    set[14] = 1;
+                    editor.putInt("set14", set[14]);
+                    editor.commit();
+
+                }*/
+                    }
+
+
+                    break;
+
+
+
+
+
+
+
+
+
+                case 2:
+                    for(int i=0;i<ssids.length;++i){
+
+                        if(ssids[i].contentEquals(wh[0])) {
+                            if(set[0]==0)
+                            {
+
+                                Dialog dialog = new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(R.layout.dialoguebox);
+                                dialog.show();
+
+                                set[0] = 1;
+                                editor.putInt("set0", set[0]);
+                                editor.commit();
+                                Intent x= new Intent("test.sharang.com.amazing.Test");
+                                x.putExtra("cluearray",set);
+                                startActivity(x);
+                            }
+
+
+
+                        }
+
+                        else
+                        if(ssids[i].contentEquals(wh[1])&&set[0]==1){
+                            if(set[1]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog = new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x= new Intent("test.sharang.com.amazing.Test");
+                                startActivity(x);
+                            }
+                            set[1]=1;
+                            editor.putInt("set1", set[1]);
+                            editor.commit();
+
+
+                        }
+                        else
+                        if(ssids[i].contentEquals(wh[2])&&set[1]==1) {
+                            if(set[2]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue3");
+                                startActivity(x);
+                            }
+                            set[2] = 1;
+
+                            editor.putInt("set2", set[2]);
+                            editor.commit();
+
+                        }
+                        else
+                        if(ssids[i].contentEquals(wh[3])&&set[2]==1) {
+                            if(set[3]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue4");
+                                startActivity(x);
+                            }
+                            set[3] = 1;
+                            editor.putInt("set3", set[3]);
+                            editor.commit();
+
+
+                        }
+
+                        else
+                        if(ssids[i].contentEquals(wh[4])&&set[3]==1) {
+                            if(set[4]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x= new Intent("com.example.aishwarya.a_mazing.Clue5");
+                                startActivity(x);
+                            }
+                            set[4] = 1;
+
+                            editor.putInt("set4", set[4]);
+                            editor.commit();
+
+                        }
+
+                        else
+                        if(ssids[i].contentEquals(wh[5])&&set[4]==1) {
+                            if(set[5]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue6");
+                                startActivity(x);
+                            }
+                            set[5] = 1;
+                            credits+=10;
+                            editor.putInt("set5", set[5]);
+                            editor.commit();
+
+                        }
+                        else
+                        if(ssids[i].contentEquals(wh[6])&&set[5]==1) {
+                            if(set[6]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue7");
+                                startActivity(x);
+                            }
+                            set[6] = 1;
+                            credits+=10;
+                            editor.putInt("set6", set[6]);
+                            editor.commit();
+
+                        }
+                        else
+                        if(ssids[i].contentEquals(wh[7])&&set[6]==1) {
+                            if(set[7]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue8");
+                                startActivity(x);
+                            }
+                            set[7] = 1;
+                            credits+=10;
+                            editor.putInt("set7", set[7]);
+                            editor.commit();
+
+                        }
+                        else
+                        if(ssids[i].contentEquals(wh[8])&&set[7]==1) {
+                            if(set[8]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue8");
+                                startActivity(x);
+                            }
+                            set[8] = 1;
+                            credits+=10;
+                            editor.putInt("set8", set[8]);
+                            editor.commit();
+
+                        }
+
+                        else
+                        if(ssids[i].contentEquals(wh[9])&&set[8]==1) {
+                            if(set[9]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue8");
+                                startActivity(x);
+                            }
+                            set[9] = 1;
+                            credits+=10;
+                            editor.putInt("set9", set[9]);
+                            editor.commit();
+
+                        }
+                        else
+                        if(ssids[i].contentEquals(wh[10])&&set[9]==1) {
+                            if(set[10]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue9");
+                                startActivity(x);
+                            }
+                            set[10] = 1;
+                            credits+=10;
+                            editor.putInt("set10", set[10]);
+                            editor.commit();
+
+                        }
+                        else
+                        if(ssids[i].contentEquals(wh[11])&&set[10]==1) {
+                            if(set[11]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue10");
+                                startActivity(x);
+                            }
+                            set[11] = 1;
+                            credits+=15;
+                            editor.putInt("set11", set[11]);
+                            editor.commit();
+
+                        }
+                        else
+                        if(ssids[i].contentEquals(wh[12])&&set[11]==1) {
+                            if(set[12]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue11");
+                                startActivity(x);
+                            }
+                            set[12] = 1;
+                            credits+=15;
+                            editor.putInt("set12", set[12]);
+                            editor.commit();
+
+                        }
+                        else
+                        if(ssids[i].contentEquals(wh[13])&&set[12]==1) {
+                            if(set[13]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue12");
+                                startActivity(x);
+                            }
+                            set[13] = 1;
+                            credits+=15;
+                            editor.putInt("set13", set[13]);
+                            editor.commit();
+
+                        }
+
+              /*  else
+                if(ssids[i].contentEquals(wh[14])&&set[13]==1) {
+                    if(set[14]==0)
+                    {
+                        TextView tv = new TextView(WifiSearcher.this);
+                        tv.setText("You have just unlocked a clue!!!check it now!!");
+                        Dialog dialog =new Dialog(WifiSearcher.this);
+                        dialog.setTitle("Congrats!!!");
+                        dialog.setContentView(tv);
+                        dialog.show();
+                    }
+                    set[14] = 1;
+                    editor.putInt("set14", set[14]);
+                    editor.commit();
+
+                }*/
+                    }
+
+
+                    break;
+
+
+
+                case 3:
+                    for(int i=0;i<ssids.length;++i){
+
+                        if(ssids[i].contentEquals(wh[0])) {
+                            if(set[0]==0)
+                            {
+
+                                Dialog dialog = new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(R.layout.dialoguebox);
+                                dialog.show();
+
+                                set[0] = 1;
+                                editor.putInt("set0", set[0]);
+                                editor.commit();
+                                Intent x= new Intent("test.sharang.com.amazing.Test");
+                                x.putExtra("cluearray",set);
+                                startActivity(x);
+                            }
+
+
+
+                        }
+
+                        else
+                        if(ssids[i].contentEquals(wh[1])&&set[0]==1){
+                            if(set[1]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog = new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x= new Intent("test.sharang.com.amazing.Test");
+                                startActivity(x);
+                            }
+                            set[1]=1;
+                            editor.putInt("set1", set[1]);
+                            editor.commit();
+
+
+                        }
+                        else
+                        if(ssids[i].contentEquals(wh[2])&&set[1]==1) {
+                            if(set[2]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue3");
+                                startActivity(x);
+                            }
+                            set[2] = 1;
+
+                            editor.putInt("set2", set[2]);
+                            editor.commit();
+
+                        }
+                        else
+                        if(ssids[i].contentEquals(wh[3])&&set[2]==1) {
+                            if(set[3]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue4");
+                                startActivity(x);
+                            }
+                            set[3] = 1;
+                            editor.putInt("set3", set[3]);
+                            editor.commit();
+
+
+                        }
+
+                        else
+                        if(ssids[i].contentEquals(wh[4])&&set[3]==1) {
+                            if(set[4]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x= new Intent("com.example.aishwarya.a_mazing.Clue5");
+                                startActivity(x);
+                            }
+                            set[4] = 1;
+
+                            editor.putInt("set4", set[4]);
+                            editor.commit();
+
+                        }
+
+                        else
+                        if(ssids[i].contentEquals(wh[5])&&set[4]==1) {
+                            if(set[5]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue6");
+                                startActivity(x);
+                            }
+                            set[5] = 1;
+                            credits+=10;
+                            editor.putInt("set5", set[5]);
+                            editor.commit();
+
+                        }
+                        else
+                        if(ssids[i].contentEquals(wh[6])&&set[5]==1) {
+                            if(set[6]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue7");
+                                startActivity(x);
+                            }
+                            set[6] = 1;
+                            credits+=10;
+                            editor.putInt("set6", set[6]);
+                            editor.commit();
+
+                        }
+                        else
+                        if(ssids[i].contentEquals(wh[7])&&set[6]==1) {
+                            if(set[7]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue8");
+                                startActivity(x);
+                            }
+                            set[7] = 1;
+                            credits+=10;
+                            editor.putInt("set7", set[7]);
+                            editor.commit();
+
+                        }
+                        else
+                        if(ssids[i].contentEquals(wh[8])&&set[7]==1) {
+                            if(set[8]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue8");
+                                startActivity(x);
+                            }
+                            set[8] = 1;
+                            credits+=10;
+                            editor.putInt("set8", set[8]);
+                            editor.commit();
+
+                        }
+
+                        else
+                        if(ssids[i].contentEquals(wh[9])&&set[8]==1) {
+                            if(set[9]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue8");
+                                startActivity(x);
+                            }
+                            set[9] = 1;
+                            credits+=10;
+                            editor.putInt("set9", set[9]);
+                            editor.commit();
+
+                        }
+                        else
+                        if(ssids[i].contentEquals(wh[10])&&set[9]==1) {
+                            if(set[10]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue9");
+                                startActivity(x);
+                            }
+                            set[10] = 1;
+                            credits+=10;
+                            editor.putInt("set10", set[10]);
+                            editor.commit();
+
+                        }
+                        else
+                        if(ssids[i].contentEquals(wh[11])&&set[10]==1) {
+                            if(set[11]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue10");
+                                startActivity(x);
+                            }
+                            set[11] = 1;
+                            credits+=15;
+                            editor.putInt("set11", set[11]);
+                            editor.commit();
+
+                        }
+                        else
+                        if(ssids[i].contentEquals(wh[12])&&set[11]==1) {
+                            if(set[12]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue11");
+                                startActivity(x);
+                            }
+                            set[12] = 1;
+                            credits+=15;
+                            editor.putInt("set12", set[12]);
+                            editor.commit();
+
+                        }
+                        else
+                        if(ssids[i].contentEquals(wh[13])&&set[12]==1) {
+                            if(set[13]==0)
+                            {
+                                TextView tv = new TextView(WifiSearcher.this);
+                                tv.setText("You have just unlocked a clue!!!check it now!!");
+                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(tv);
+                                dialog.show();
+                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue12");
+                                startActivity(x);
+                            }
+                            set[13] = 1;
+                            credits+=15;
+                            editor.putInt("set13", set[13]);
+                            editor.commit();
+
+                        }
+
+              /*  else
+                if(ssids[i].contentEquals(wh[14])&&set[13]==1) {
+                    if(set[14]==0)
+                    {
+                        TextView tv = new TextView(WifiSearcher.this);
+                        tv.setText("You have just unlocked a clue!!!check it now!!");
+                        Dialog dialog =new Dialog(WifiSearcher.this);
+                        dialog.setTitle("Congrats!!!");
+                        dialog.setContentView(tv);
+                        dialog.show();
+                    }
+                    set[14] = 1;
+                    editor.putInt("set14", set[14]);
+                    editor.commit();
+
+                }*/
+                    }
+
+
+
+                    break;
+
+
             }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
     }
 }
