@@ -29,7 +29,7 @@ public class WifiSearcher extends AppCompatActivity{
     WifiScanReceiver wifiReciever;    //this is the broadcast reciever class object
     int credits=0;                    //this is the in-game credits
 
-    String wh[]={"HostelF","1","2","3","4","5","6","7","8","9","10","11","12","13","14"};  //this is the ssid list we create
+    String wh[]={"TransportationLab","NaacRoom","Schc","FluidMechanicsLab","WorkShop","EmechLab","DarkRoom","SurveyingLab","Library","ProjectLab","ExaminationDept","SeminarHall","NutritionAndDlab","13","14"};  //this is the ssid list we create
     //this has to be set according to the room names!!!
 
     int set[]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};   //this determines whether the ssid is unlocked
@@ -196,7 +196,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.Test");
+                                Intent x= new Intent("test.sharang.com.amazing.PocClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[1]=1;
@@ -215,7 +216,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue3");
+                                Intent x= new Intent("test.sharang.com.amazing.PocClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[2] = 1;
@@ -234,7 +236,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue4");
+                                Intent x= new Intent("test.sharang.com.amazing.PocClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[3] = 1;
@@ -254,7 +257,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x= new Intent("com.example.aishwarya.a_mazing.Clue5");
+                                Intent x= new Intent("test.sharang.com.amazing.PocClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[4] = 1;
@@ -274,7 +278,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue6");
+                                Intent x= new Intent("test.sharang.com.amazing.PocClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[5] = 1;
@@ -293,7 +298,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue7");
+                                Intent x= new Intent("test.sharang.com.amazing.PocClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[6] = 1;
@@ -312,7 +318,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue8");
+                                Intent x= new Intent("test.sharang.com.amazing.PocClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[7] = 1;
@@ -331,7 +338,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue8");
+                                Intent x= new Intent("test.sharang.com.amazing.PocClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[8] = 1;
@@ -351,7 +359,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue8");
+                                Intent x= new Intent("test.sharang.com.amazing.PocClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[9] = 1;
@@ -370,7 +379,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue9");
+                                Intent x= new Intent("test.sharang.com.amazing.PocClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[10] = 1;
@@ -389,7 +399,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue10");
+                                Intent x= new Intent("test.sharang.com.amazing.PocClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[11] = 1;
@@ -408,7 +419,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue11");
+                                Intent x= new Intent("test.sharang.com.amazing.PocClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[12] = 1;
@@ -427,7 +439,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue12");
+                                Intent x= new Intent("test.sharang.com.amazing.PocClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[13] = 1;
@@ -455,13 +468,6 @@ public class WifiSearcher extends AppCompatActivity{
                 }*/
                     }
 
-
-
-
-
-
-
-
                     break;
 
 
@@ -485,7 +491,7 @@ public class WifiSearcher extends AppCompatActivity{
                                 set[0] = 1;
                                 editor.putInt("set0", set[0]);
                                 editor.commit();
-                                Intent x= new Intent("test.sharang.com.amazing.Test");
+                                Intent x= new Intent("test.sharang.com.amazing.HpClue");
                                 x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
@@ -504,7 +510,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.Test");
+                                Intent x= new Intent("test.sharang.com.amazing.HpClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[1]=1;
@@ -523,7 +530,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue3");
+                                Intent x= new Intent("test.sharang.com.amazing.HpClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[2] = 1;
@@ -542,7 +550,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue4");
+                                Intent x= new Intent("test.sharang.com.amazing.HpClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[3] = 1;
@@ -562,7 +571,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x= new Intent("com.example.aishwarya.a_mazing.Clue5");
+                                Intent x= new Intent("test.sharang.com.amazing.HpClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[4] = 1;
@@ -582,7 +592,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue6");
+                                Intent x= new Intent("test.sharang.com.amazing.HpClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[5] = 1;
@@ -601,7 +612,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue7");
+                                Intent x= new Intent("test.sharang.com.amazing.HpClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[6] = 1;
@@ -620,7 +632,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue8");
+                                Intent x= new Intent("test.sharang.com.amazing.HpClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[7] = 1;
@@ -639,7 +652,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue8");
+                                Intent x= new Intent("test.sharang.com.amazing.HpClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[8] = 1;
@@ -659,7 +673,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue8");
+                                Intent x= new Intent("test.sharang.com.amazing.HpClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[9] = 1;
@@ -678,7 +693,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue9");
+                                Intent x= new Intent("test.sharang.com.amazing.HpClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[10] = 1;
@@ -697,7 +713,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue10");
+                                Intent x= new Intent("test.sharang.com.amazing.HpClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[11] = 1;
@@ -716,7 +733,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue11");
+                                Intent x= new Intent("test.sharang.com.amazing.HpClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[12] = 1;
@@ -735,7 +753,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue12");
+                                Intent x= new Intent("test.sharang.com.amazing.HpClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[13] = 1;
@@ -789,7 +808,7 @@ public class WifiSearcher extends AppCompatActivity{
                                 set[0] = 1;
                                 editor.putInt("set0", set[0]);
                                 editor.commit();
-                                Intent x= new Intent("test.sharang.com.amazing.Test");
+                                Intent x= new Intent("test.sharang.com.amazing.FdClue");
                                 x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
@@ -808,7 +827,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.Test");
+                                Intent x= new Intent("test.sharang.com.amazing.FdClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[1]=1;
@@ -827,7 +847,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue3");
+                                Intent x= new Intent("test.sharang.com.amazing.FdClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[2] = 1;
@@ -846,7 +867,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue4");
+                                Intent x= new Intent("test.sharang.com.amazing.FdClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[3] = 1;
@@ -866,7 +888,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x= new Intent("com.example.aishwarya.a_mazing.Clue5");
+                                Intent x= new Intent("test.sharang.com.amazing.FdClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[4] = 1;
@@ -886,7 +909,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue6");
+                                Intent x= new Intent("test.sharang.com.amazing.FdClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[5] = 1;
@@ -905,7 +929,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue7");
+                                Intent x= new Intent("test.sharang.com.amazing.FdClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[6] = 1;
@@ -924,7 +949,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue8");
+                                Intent x= new Intent("test.sharang.com.amazing.FdClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[7] = 1;
@@ -943,7 +969,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue8");
+                                Intent x= new Intent("test.sharang.com.amazing.FdClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[8] = 1;
@@ -963,7 +990,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue8");
+                                Intent x= new Intent("test.sharang.com.amazing.FdClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[9] = 1;
@@ -982,7 +1010,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue9");
+                                Intent x= new Intent("test.sharang.com.amazing.FdClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[10] = 1;
@@ -1001,7 +1030,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue10");
+                                Intent x= new Intent("test.sharang.com.amazing.FdClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[11] = 1;
@@ -1020,7 +1050,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue11");
+                                Intent x= new Intent("test.sharang.com.amazing.FdClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[12] = 1;
@@ -1039,7 +1070,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue12");
+                                Intent x= new Intent("test.sharang.com.amazing.FdClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[13] = 1;
@@ -1087,7 +1119,7 @@ public class WifiSearcher extends AppCompatActivity{
                                 set[0] = 1;
                                 editor.putInt("set0", set[0]);
                                 editor.commit();
-                                Intent x= new Intent("test.sharang.com.amazing.Test");
+                                Intent x= new Intent("test.sharang.com.amazing.SlClue");
                                 x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
@@ -1106,7 +1138,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.Test");
+                                Intent x= new Intent("test.sharang.com.amazing.SlClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[1]=1;
@@ -1125,7 +1158,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue3");
+                                Intent x= new Intent("test.sharang.com.amazing.SlClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[2] = 1;
@@ -1144,7 +1178,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue4");
+                                Intent x= new Intent("test.sharang.com.amazing.SlClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[3] = 1;
@@ -1164,7 +1199,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x= new Intent("com.example.aishwarya.a_mazing.Clue5");
+                                Intent x= new Intent("test.sharang.com.amazing.SlClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[4] = 1;
@@ -1184,7 +1220,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue6");
+                                Intent x= new Intent("test.sharang.com.amazing.SlClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[5] = 1;
@@ -1203,7 +1240,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue7");
+                                Intent x= new Intent("test.sharang.com.amazing.SlClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[6] = 1;
@@ -1222,7 +1260,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue8");
+                                Intent x= new Intent("test.sharang.com.amazing.SlClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[7] = 1;
@@ -1241,7 +1280,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue8");
+                                Intent x= new Intent("test.sharang.com.amazing.SlClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[8] = 1;
@@ -1261,7 +1301,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue8");
+                                Intent x= new Intent("test.sharang.com.amazing.SlClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[9] = 1;
@@ -1280,7 +1321,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue9");
+                                Intent x= new Intent("test.sharang.com.amazing.SlClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[10] = 1;
@@ -1299,7 +1341,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue10");
+                                Intent x= new Intent("test.sharang.com.amazing.SlClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[11] = 1;
@@ -1318,7 +1361,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue11");
+                                Intent x= new Intent("test.sharang.com.amazing.SlClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[12] = 1;
@@ -1337,7 +1381,8 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x=new Intent("com.example.aishwarya.a_mazing.Clue12");
+                                Intent x= new Intent("test.sharang.com.amazing.SlClue");
+                                x.putExtra("cluearray",set);
                                 startActivity(x);
                             }
                             set[13] = 1;
