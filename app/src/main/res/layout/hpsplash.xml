@@ -6,8 +6,15 @@
 
     <VideoView
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_height="190dp"
     android:id="@+id/vv"
     android:tag="LOOK DEATH IN THE EYE"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="380dp"
+        android:src="@drawable/hpsplash"
+        android:tag="Ahoy mate!!!!Set Sail!!"/>
+
 
 </LinearLayout>
