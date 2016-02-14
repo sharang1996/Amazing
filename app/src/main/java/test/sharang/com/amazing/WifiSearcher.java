@@ -29,7 +29,7 @@ public class WifiSearcher extends AppCompatActivity{
     WifiScanReceiver wifiReciever;    //this is the broadcast reciever class object
     int credits=0;                    //this is the in-game credits
 
-    String wh[]={"TransportationLab","NaacRoom","Schc","FluidMechanicsLab","WorkShop","EmechLab","DarkRoom","SurveyingLab","Library","ProjectLab","ExaminationDept","SeminarHall","NutritionAndDlab","13","14"};  //this is the ssid list we create
+    String wh[]={"SYMBIOSIS","NaacRoom","Schc","FluidMechanicsLab","WorkShop","EmechLab","DarkRoom","SurveyingLab","Library","ProjectLab","ExaminationDept","SeminarHall","NutritionAndDlab","GirlsWashroom","AppliedScience","Reception"};  //this is the ssid list we create
     //this has to be set according to the room names!!!
 
     int set[]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};   //this determines whether the ssid is unlocked
@@ -165,7 +165,7 @@ public class WifiSearcher extends AppCompatActivity{
                 case 0:
                     for(int i=0;i<ssids.length;++i){
 
-                        if(ssids[i].contentEquals(wh[0])) {
+                        if(ssids[i].contentEquals(wh[2])) {
                             if(set[0]==0)
                             {
 
@@ -187,7 +187,7 @@ public class WifiSearcher extends AppCompatActivity{
                         }
 
                         else
-                        if(ssids[i].contentEquals(wh[1])&&set[0]==1){
+                        if(ssids[i].contentEquals(wh[3])&&set[0]==1){
                             if(set[1]==0)
                             {
                                 TextView tv = new TextView(WifiSearcher.this);

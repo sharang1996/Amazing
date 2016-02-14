@@ -2,7 +2,6 @@ package test.sharang.com.amazing;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.LinearLayout;
@@ -21,7 +20,7 @@ public class Test extends Activity {
         int set[]=new int[15];
         set= i.getIntArrayExtra("cluearray");
         if(set[0]==1){
-            LinearLayout l=(LinearLayout)findViewById(R.id.ll);
+            LinearLayout l=(LinearLayout)findViewById(R.id.ll3);
             //l.setBackgroundResource(R.drawable.mainsplash);
             l.setBackgroundColor(Color.BLUE);
             TextView tv=(TextView)findViewById(R.id.tv);
