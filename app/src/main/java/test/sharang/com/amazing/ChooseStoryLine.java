@@ -11,7 +11,7 @@ import android.widget.ImageButton;
  */
 public class ChooseStoryLine extends Activity implements View.OnClickListener{
 
-    ImageButton jack,harry,fd,sherlock;
+    ImageButton jack,harry,fd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,12 +21,12 @@ public class ChooseStoryLine extends Activity implements View.OnClickListener{
         jack=(ImageButton)findViewById(R.id.poc);
         harry=(ImageButton)findViewById(R.id.hp);
         fd=(ImageButton)findViewById(R.id.fd);
-        sherlock=(ImageButton)findViewById(R.id.sl);
+
 
         jack.setOnClickListener(this);
         harry.setOnClickListener(this);
         fd.setOnClickListener(this);
-        sherlock.setOnClickListener(this);
+
 
     }
 
@@ -48,11 +48,6 @@ public class ChooseStoryLine extends Activity implements View.OnClickListener{
 
             case R.id.fd:
                 i=new Intent("test.sharang.com.amazing.FdSplash");
-                startActivity(i);
-                break;
-
-            case R.id.sl:
-                i=new Intent("test.sharang.com.amazing.SlSplash");
                 startActivity(i);
                 break;
         }

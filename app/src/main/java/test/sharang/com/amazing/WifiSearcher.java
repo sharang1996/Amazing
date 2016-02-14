@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -55,7 +56,7 @@ public class WifiSearcher extends AppCompatActivity{
                 preferences=getApplicationContext().getSharedPreferences("xyz",MODE_PRIVATE);
                 editor = preferences.edit();
                 Snackbar.make(view, "credits are :"+preferences.getInt("credits",0), Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                        .setAction("Action", null).setActionTextColor(Color.WHITE).show();
             }
         });
 
