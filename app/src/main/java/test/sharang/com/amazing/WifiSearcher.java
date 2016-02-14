@@ -48,7 +48,6 @@ public class WifiSearcher extends AppCompatActivity{
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setBackground(getResources().getDrawable(R.drawable.coin));
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
