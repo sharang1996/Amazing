@@ -19,6 +19,8 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.List;
 
 public class WifiSearcher extends AppCompatActivity{
@@ -49,14 +51,16 @@ public class WifiSearcher extends AppCompatActivity{
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setBackground(getResources().getDrawable(R.drawable.coin));
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                preferences=getApplicationContext().getSharedPreferences("xyz",MODE_PRIVATE);
+                preferences=getApplicationContext().getSharedPreferences("xyz", MODE_PRIVATE);
                 editor = preferences.edit();
-                Snackbar.make(view, "credits are :"+preferences.getInt("credits",0), Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).setActionTextColor(Color.WHITE).show();
+              Snackbar.make(view, "credits are :" + preferences.getInt("credits", 0), Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+
             }
         });
 
@@ -133,7 +137,9 @@ public class WifiSearcher extends AppCompatActivity{
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_about_us) {
+            Toast.makeText(WifiSearcher.this,"This app has been created by Sharang Gupta And Aishwarya Dixit,and any bugs can be reported at sharang.gupta@sitpune.edu.in",Toast.LENGTH_SHORT).show();
+
             return true;
         }
 
