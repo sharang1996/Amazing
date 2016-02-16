@@ -22,7 +22,7 @@ public class PocClue extends Activity {
         set= i.getIntArrayExtra("cluearray");
         if(set[0]==1&&set[1]==0){
             LinearLayout l=(LinearLayout)findViewById(R.id.ll2);
-           l.setBackgroundResource(R.drawable.pocclue1);
+            l.setBackgroundResource(R.drawable.pocclue1);
 
         }
         else

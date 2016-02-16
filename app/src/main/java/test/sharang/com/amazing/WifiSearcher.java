@@ -32,7 +32,7 @@ public class WifiSearcher extends AppCompatActivity{
     WifiScanReceiver wifiReciever;    //this is the broadcast reciever class object
     int credits=0;                    //this is the in-game credits
 //                 0             1               2          3         4                  5         6            7            8          9          10                11             12           13                 14               15             16          17             18             19         20      21            22         23                24                  25            26                 27                     28                   29
-    String wh[]={"SYMBIOSIS","transportation","NaacRoom","Schc","FluidMechanicsLab","WorkShop","EmechLab","DarkRoom","SurveyingLab","Library","ProjectLab","ExaminationDept","SeminarHall","NutritionAndDlab","GirlsWashroom","AppliedScience","Reception","MaterialsLab","AccountsDept","Amphitheatre","S6","ServerRoom","AsStaffroom","Ssbs","EnviornmentalEngineeringLab","BmeLab","SheelprabhaOffice","WashroomExamDept","FacultyRoomNutritionLab","WindowExamDept"};  //this is the ssid list we create
+    String wh[]={"SYMBIOSIS","transportation","NaacRoom","Schc","FluidMechanicsLab","WorkShop","EmechLab","DarkRoom","SurveyingLab","Library","ProjectLab","ExaminationDept","SeminarHall","NutritionAndDlab","GirlsWashroom","AppliedScience","Reception","MaterialsLab","AccountsDept","Amphitheatre","S9","ServerRoom","AsStaffroom","Ssbs","EnviornmentalEngineeringLab","BmeLab","SheelprabhaOffice","WashroomExamDept","FacultyRoomNutritionLab","WindowExamDept"};  //this is the ssid list we create
     //this has to be set according to the room names!!!
 
     int set[]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};   //this determines whether the ssid is unlocked
@@ -183,12 +183,19 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setContentView(R.layout.dialoguebox);
                                 dialog.show();
 
-                                set[0] = 1;
-                                editor.putInt("set0", set[0]);
-                                editor.commit();
-                                Intent x= new Intent("test.sharang.com.amazing.PocClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        set[0] = 1;
+                                        editor.putInt("set0", set[0]);
+                                        editor.commit();
+                                        Intent x = new Intent("test.sharang.com.amazing.PocClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
+
+
                             }
 
 
@@ -204,13 +211,22 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(R.layout.dialoguebox);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.PocClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        set[1]=1;
+                                        editor.putInt("set1", set[1]);
+                                        editor.commit();
+                                        Intent x= new Intent("test.sharang.com.amazing.PocClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
+
+
                             }
-                            set[1]=1;
-                            editor.putInt("set1", set[1]);
-                            editor.commit();
+
 
 
                         }
@@ -218,39 +234,52 @@ public class WifiSearcher extends AppCompatActivity{
                         if(ssids[i].contentEquals(wh[2])&&set[1]==1) {
                             if(set[2]==0)
                             {
-                                TextView tv = new TextView(WifiSearcher.this);
-                                tv.setText("You have just unlocked a clue!!!check it now!!");
                                 Dialog dialog =new Dialog(WifiSearcher.this);
                                 dialog.setTitle("Congrats!!!");
-                                dialog.setContentView(tv);
+                                dialog.setContentView(R.layout.dialoguebox);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.PocClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
-                            }
-                            set[2] = 1;
 
-                            editor.putInt("set2", set[2]);
-                            editor.commit();
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        set[2] = 1;
+                                        editor.putInt("set2", set[2]);
+                                        editor.commit();
+                                        Intent x = new Intent("test.sharang.com.amazing.PocClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
+
+
+                            }
+
+
+
 
                         }
                         else
                         if(ssids[i].contentEquals(wh[3])&&set[2]==1) {
                             if(set[3]==0)
                             {
-                                TextView tv = new TextView(WifiSearcher.this);
-                                tv.setText("You have just unlocked a clue!!!check it now!!");
+
                                 Dialog dialog =new Dialog(WifiSearcher.this);
                                 dialog.setTitle("Congrats!!!");
-                                dialog.setContentView(tv);
+                                dialog.setContentView(R.layout.dialoguebox);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.PocClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        set[3] = 1;
+                                        editor.putInt("set3", set[3]);
+                                        editor.commit();
+                                        Intent x = new Intent("test.sharang.com.amazing.PocClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
                             }
-                            set[3] = 1;
-                            editor.putInt("set3", set[3]);
-                            editor.commit();
 
 
                         }
@@ -259,20 +288,26 @@ public class WifiSearcher extends AppCompatActivity{
                         if(ssids[i].contentEquals(wh[4])&&set[3]==1) {
                             if(set[4]==0)
                             {
-                                TextView tv = new TextView(WifiSearcher.this);
-                                tv.setText("You have just unlocked a clue!!!check it now!!");
+
                                 Dialog dialog =new Dialog(WifiSearcher.this);
                                 dialog.setTitle("Congrats!!!");
-                                dialog.setContentView(tv);
+                                dialog.setContentView(R.layout.dialoguebox);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.PocClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
-                            }
-                            set[4] = 1;
 
-                            editor.putInt("set4", set[4]);
-                            editor.commit();
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        set[4] = 1;
+                                        editor.putInt("set4", set[4]);
+                                        editor.commit();
+                                        Intent x = new Intent("test.sharang.com.amazing.PocClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
+                            }
+
 
                         }
 
@@ -280,84 +315,118 @@ public class WifiSearcher extends AppCompatActivity{
                         if(ssids[i].contentEquals(wh[5])&&set[4]==1) {
                             if(set[5]==0)
                             {
-                                TextView tv = new TextView(WifiSearcher.this);
-                                tv.setText("You have just unlocked a clue!!!check it now!!");
+
                                 Dialog dialog =new Dialog(WifiSearcher.this);
                                 dialog.setTitle("Congrats!!!");
-                                dialog.setContentView(tv);
+                                dialog.setContentView(R.layout.dialoguebox);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.PocClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        set[5] = 1;
+                                        credits+=10;
+                                        editor.putInt("credits",credits);
+                                        editor.putInt("set5", set[5]);
+                                        editor.commit();
+
+                                        Intent x = new Intent("test.sharang.com.amazing.PocClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
                             }
-                            set[5] = 1;
-                            credits+=10;
-                            editor.putInt("credits",credits);
-                            editor.putInt("set5", set[5]);
-                            editor.commit();
+
 
                         }
                         else
                         if(ssids[i].contentEquals(wh[6])&&set[5]==1) {
                             if(set[6]==0)
                             {
-                                TextView tv = new TextView(WifiSearcher.this);
-                                tv.setText("You have just unlocked a clue!!!check it now!!");
+
                                 Dialog dialog =new Dialog(WifiSearcher.this);
                                 dialog.setTitle("Congrats!!!");
-                                dialog.setContentView(tv);
+                                dialog.setContentView(R.layout.dialoguebox);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.PocClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
+
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        set[6] = 1;
+                                        credits+=10;
+                                        editor.putInt("credits",credits);
+                                        editor.putInt("set6", set[6]);
+                                        editor.commit();
+
+                                        Intent x = new Intent("test.sharang.com.amazing.PocClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
                             }
-                            set[6] = 1;
-                            credits+=10;
-                            editor.putInt("credits",credits);
-                            editor.putInt("set6", set[6]);
-                            editor.commit();
+
 
                         }
                         else
                         if(ssids[i].contentEquals(wh[7])&&set[6]==1) {
                             if(set[7]==0)
                             {
-                                TextView tv = new TextView(WifiSearcher.this);
-                                tv.setText("You have just unlocked a clue!!!check it now!!");
+
                                 Dialog dialog =new Dialog(WifiSearcher.this);
                                 dialog.setTitle("Congrats!!!");
-                                dialog.setContentView(tv);
+                                dialog.setContentView(R.layout.dialoguebox);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.PocClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
+
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        set[7] = 1;
+                                        credits+=10;
+                                        editor.putInt("credits",credits);
+                                        editor.putInt("set7", set[7]);
+                                        editor.commit();
+
+                                        Intent x = new Intent("test.sharang.com.amazing.PocClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
                             }
-                            set[7] = 1;
-                            credits+=10;
-                            editor.putInt("credits",credits);
-                            editor.putInt("set7", set[7]);
-                            editor.commit();
+
 
                         }
                         else
                         if(ssids[i].contentEquals(wh[8])&&set[7]==1) {
                             if(set[8]==0)
                             {
-                                TextView tv = new TextView(WifiSearcher.this);
-                                tv.setText("You have just unlocked a clue!!!check it now!!");
                                 Dialog dialog =new Dialog(WifiSearcher.this);
                                 dialog.setTitle("Congrats!!!");
-                                dialog.setContentView(tv);
+                                dialog.setContentView(R.layout.dialoguebox);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.PocClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
+
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        set[8] = 1;
+                                        credits+=10;
+                                        editor.putInt("credits",credits);
+                                        editor.putInt("set8", set[8]);
+                                        editor.commit();
+
+                                        Intent x = new Intent("test.sharang.com.amazing.PocClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
                             }
-                            set[8] = 1;
-                            credits+=10;
-                            editor.putInt("credits",credits);
-                            editor.putInt("set8", set[8]);
-                            editor.commit();
+
 
                         }
 
@@ -365,105 +434,145 @@ public class WifiSearcher extends AppCompatActivity{
                         if(ssids[i].contentEquals(wh[9])&&set[8]==1) {
                             if(set[9]==0)
                             {
-                                TextView tv = new TextView(WifiSearcher.this);
-                                tv.setText("You have just unlocked a clue!!!check it now!!");
                                 Dialog dialog =new Dialog(WifiSearcher.this);
                                 dialog.setTitle("Congrats!!!");
-                                dialog.setContentView(tv);
+                                dialog.setContentView(R.layout.dialoguebox);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.PocClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
+
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        set[9] = 1;
+                                        credits+=10;
+                                        editor.putInt("credits",credits);
+                                        editor.putInt("set9", set[9]);
+                                        editor.commit();
+
+                                        Intent x = new Intent("test.sharang.com.amazing.PocClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
                             }
-                            set[9] = 1;
-                            credits+=10;
-                            editor.putInt("credits",credits);
-                            editor.putInt("set9", set[9]);
-                            editor.commit();
+
 
                         }
                         else
                         if(ssids[i].contentEquals(wh[10])&&set[9]==1) {
                             if(set[10]==0)
                             {
-                                TextView tv = new TextView(WifiSearcher.this);
-                                tv.setText("You have just unlocked a clue!!!check it now!!");
                                 Dialog dialog =new Dialog(WifiSearcher.this);
                                 dialog.setTitle("Congrats!!!");
-                                dialog.setContentView(tv);
+                                dialog.setContentView(R.layout.dialoguebox);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.PocClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
+
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        set[10] = 1;
+                                        credits+=10;
+                                        editor.putInt("credits",credits);
+                                        editor.putInt("set10", set[10]);
+                                        editor.commit();
+
+                                        Intent x = new Intent("test.sharang.com.amazing.PocClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
                             }
-                            set[10] = 1;
-                            credits+=10;
-                            editor.putInt("credits",credits);
-                            editor.putInt("set10", set[10]);
-                            editor.commit();
+
 
                         }
                         else
                         if(ssids[i].contentEquals(wh[11])&&set[10]==1) {
                             if(set[11]==0)
                             {
-                                TextView tv = new TextView(WifiSearcher.this);
-                                tv.setText("You have just unlocked a clue!!!check it now!!");
                                 Dialog dialog =new Dialog(WifiSearcher.this);
                                 dialog.setTitle("Congrats!!!");
-                                dialog.setContentView(tv);
+                                dialog.setContentView(R.layout.dialoguebox);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.PocClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
+
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        set[11] = 1;
+                                        credits+=15;
+                                        editor.putInt("credits",credits);
+                                        editor.putInt("set11", set[11]);
+                                        editor.commit();
+
+                                        Intent x = new Intent("test.sharang.com.amazing.PocClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
                             }
-                            set[11] = 1;
-                            credits+=15;
-                            editor.putInt("credits",credits);
-                            editor.putInt("set11", set[11]);
-                            editor.commit();
+
 
                         }
                         else
                         if(ssids[i].contentEquals(wh[12])&&set[11]==1) {
                             if(set[12]==0)
                             {
-                                TextView tv = new TextView(WifiSearcher.this);
-                                tv.setText("You have just unlocked a clue!!!check it now!!");
                                 Dialog dialog =new Dialog(WifiSearcher.this);
                                 dialog.setTitle("Congrats!!!");
-                                dialog.setContentView(tv);
+                                dialog.setContentView(R.layout.dialoguebox);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.PocClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
+
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        set[12] = 1;
+                                        credits+=15;
+                                        editor.putInt("credits",credits);
+                                        editor.putInt("set12", set[12]);
+                                        editor.commit();
+
+                                        Intent x = new Intent("test.sharang.com.amazing.PocClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
                             }
-                            set[12] = 1;
-                            credits+=15;
-                            editor.putInt("credits",credits);
-                            editor.putInt("set12", set[12]);
-                            editor.commit();
+
 
                         }
                         else
                         if(ssids[i].contentEquals(wh[13])&&set[12]==1) {
                             if(set[13]==0)
                             {
-                                TextView tv = new TextView(WifiSearcher.this);
-                                tv.setText("You have just unlocked a clue!!!check it now!!");
                                 Dialog dialog =new Dialog(WifiSearcher.this);
                                 dialog.setTitle("Congrats!!!");
-                                dialog.setContentView(tv);
+                                dialog.setContentView(R.layout.dialoguebox);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.PocClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
+
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        set[13] = 1;
+                                        credits+=15;
+                                        editor.putInt("credits",credits);
+                                        editor.putInt("set13", set[13]);
+                                        editor.commit();
+
+                                        Intent x = new Intent("test.sharang.com.amazing.PocClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
                             }
-                            set[13] = 1;
-                            credits+=15;
-                            editor.putInt("credits",credits);
-                            editor.putInt("set13", set[13]);
-                            editor.commit();
+
 
                         }
 
@@ -502,15 +611,19 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setContentView(R.layout.dialoguebox);
                                 dialog.show();
 
-                                set[0] = 1;
-                                editor.putInt("set0", set[0]);
-                                editor.commit();
-                                Intent x= new Intent("test.sharang.com.amazing.HpClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        set[0] = 1;
+                                        editor.putInt("set0", set[0]);
+                                        editor.commit();
+                                        Intent x = new Intent("test.sharang.com.amazing.HpClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
+
                             }
-
-
 
                         }
 
@@ -518,19 +631,28 @@ public class WifiSearcher extends AppCompatActivity{
                         if(ssids[i].contentEquals(wh[19])&&set[0]==1){          //amphi
                             if(set[1]==0)
                             {
-                                TextView tv = new TextView(WifiSearcher.this);
-                                tv.setText("You have just unlocked a clue!!!check it now!!");
+
                                 Dialog dialog = new Dialog(WifiSearcher.this);
                                 dialog.setTitle("Congrats!!!");
-                                dialog.setContentView(tv);
+                                dialog.setContentView(R.layout.dialoguebox);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.HpClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        set[1] = 1;
+                                        editor.putInt("set1", set[1]);
+                                        editor.commit();
+                                        Intent x = new Intent("test.sharang.com.amazing.HpClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
+
+
+
                             }
-                            set[1]=1;
-                            editor.putInt("set1", set[1]);
-                            editor.commit();
+
 
 
                         }
@@ -538,39 +660,51 @@ public class WifiSearcher extends AppCompatActivity{
                         if(ssids[i].contentEquals(wh[18])&&set[1]==1) {         //accounts
                             if(set[2]==0)
                             {
-                                TextView tv = new TextView(WifiSearcher.this);
-                                tv.setText("You have just unlocked a clue!!!check it now!!");
-                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                Dialog dialog = new Dialog(WifiSearcher.this);
                                 dialog.setTitle("Congrats!!!");
-                                dialog.setContentView(tv);
+                                dialog.setContentView(R.layout.dialoguebox);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.HpClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
-                            }
-                            set[2] = 1;
 
-                            editor.putInt("set2", set[2]);
-                            editor.commit();
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        set[2] = 1;
+                                        editor.putInt("set2", set[2]);
+                                        editor.commit();
+
+                                        Intent x = new Intent("test.sharang.com.amazing.HpClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
+
+
+                            }
+
 
                         }
                         else
                         if(ssids[i].contentEquals(wh[5])&&set[2]==1) {           //workshop
                             if(set[3]==0)
                             {
-                                TextView tv = new TextView(WifiSearcher.this);
-                                tv.setText("You have just unlocked a clue!!!check it now!!");
-                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                Dialog dialog = new Dialog(WifiSearcher.this);
                                 dialog.setTitle("Congrats!!!");
-                                dialog.setContentView(tv);
+                                dialog.setContentView(R.layout.dialoguebox);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.HpClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        set[3] = 1;
+                                        editor.putInt("set3", set[3]);
+                                        editor.commit();
+
+                                        Intent x = new Intent("test.sharang.com.amazing.HpClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
                             }
-                            set[3] = 1;
-                            editor.putInt("set3", set[3]);
-                            editor.commit();
 
 
                         }
@@ -579,20 +713,25 @@ public class WifiSearcher extends AppCompatActivity{
                         if(ssids[i].contentEquals(wh[17])&&set[3]==1) {                   //materials
                             if(set[4]==0)
                             {
-                                TextView tv = new TextView(WifiSearcher.this);
-                                tv.setText("You have just unlocked a clue!!!check it now!!");
-                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                Dialog dialog = new Dialog(WifiSearcher.this);
                                 dialog.setTitle("Congrats!!!");
-                                dialog.setContentView(tv);
+                                dialog.setContentView(R.layout.dialoguebox);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.HpClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
-                            }
-                            set[4] = 1;
 
-                            editor.putInt("set4", set[4]);
-                            editor.commit();
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        set[4] = 1;
+                                        editor.putInt("set4", set[4]);
+                                        editor.commit();
+
+                                        Intent x = new Intent("test.sharang.com.amazing.HpClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
+                            }
+
 
                         }
 
@@ -600,84 +739,110 @@ public class WifiSearcher extends AppCompatActivity{
                         if(ssids[i].contentEquals(wh[1])&&set[4]==1) {                  //transportation
                             if(set[5]==0)
                             {
-                                TextView tv = new TextView(WifiSearcher.this);
-                                tv.setText("You have just unlocked a clue!!!check it now!!");
-                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                Dialog dialog = new Dialog(WifiSearcher.this);
                                 dialog.setTitle("Congrats!!!");
-                                dialog.setContentView(tv);
+                                dialog.setContentView(R.layout.dialoguebox);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.HpClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        set[5] = 1;
+                                        credits+=10;
+                                        editor.putInt("credits",credits);
+                                        editor.putInt("set5", set[5]);
+                                        editor.commit();
+
+
+                                        Intent x = new Intent("test.sharang.com.amazing.HpClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
                             }
-                            set[5] = 1;
-                            credits+=10;
-                            editor.putInt("credits",credits);
-                            editor.putInt("set5", set[5]);
-                            editor.commit();
 
                         }
                         else
                         if(ssids[i].contentEquals(wh[9])&&set[5]==1) {             //library
                             if(set[6]==0)
                             {
-                                TextView tv = new TextView(WifiSearcher.this);
-                                tv.setText("You have just unlocked a clue!!!check it now!!");
-                                Dialog dialog =new Dialog(WifiSearcher.this);
+
+                                Dialog dialog = new Dialog(WifiSearcher.this);
                                 dialog.setTitle("Congrats!!!");
-                                dialog.setContentView(tv);
+                                dialog.setContentView(R.layout.dialoguebox);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.HpClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        set[6] = 1;
+                                        credits+=10;
+                                        editor.putInt("credits",credits);
+                                        editor.putInt("set6", set[6]);
+                                        editor.commit();
+
+                                        Intent x = new Intent("test.sharang.com.amazing.HpClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
                             }
-                            set[6] = 1;
-                            credits+=10;
-                            editor.putInt("credits",credits);
-                            editor.putInt("set6", set[6]);
-                            editor.commit();
+
 
                         }
                         else
                         if(ssids[i].contentEquals(wh[14])&&set[6]==1) {                               //girls toilet
                             if(set[7]==0)
                             {
-                                TextView tv = new TextView(WifiSearcher.this);
-                                tv.setText("You have just unlocked a clue!!!check it now!!");
-                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                Dialog dialog = new Dialog(WifiSearcher.this);
                                 dialog.setTitle("Congrats!!!");
-                                dialog.setContentView(tv);
+                                dialog.setContentView(R.layout.dialoguebox);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.HpClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        set[7] = 1;
+                                        credits+=10;
+                                        editor.putInt("credits",credits);
+                                        editor.putInt("set7", set[7]);
+                                        editor.commit();
+
+                                        Intent x = new Intent("test.sharang.com.amazing.HpClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
                             }
-                            set[7] = 1;
-                            credits+=10;
-                            editor.putInt("credits",credits);
-                            editor.putInt("set7", set[7]);
-                            editor.commit();
+
 
                         }
                         else
                         if(ssids[i].contentEquals(wh[7])&&set[7]==1) {                       //darkroom
                             if(set[8]==0)
                             {
-                                TextView tv = new TextView(WifiSearcher.this);
-                                tv.setText("You have just unlocked a clue!!!check it now!!");
-                                Dialog dialog =new Dialog(WifiSearcher.this);
+
+                                Dialog dialog = new Dialog(WifiSearcher.this);
                                 dialog.setTitle("Congrats!!!");
-                                dialog.setContentView(tv);
+                                dialog.setContentView(R.layout.dialoguebox);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.HpClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        set[8] = 1;
+                                        credits+=10;
+                                        editor.putInt("credits",credits);
+                                        editor.putInt("set8", set[8]);
+                                        editor.commit();
+
+                                        Intent x = new Intent("test.sharang.com.amazing.HpClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
                             }
-                            set[8] = 1;
-                            credits+=10;
-                            editor.putInt("credits",credits);
-                            editor.putInt("set8", set[8]);
-                            editor.commit();
+
 
                         }
 
@@ -685,105 +850,131 @@ public class WifiSearcher extends AppCompatActivity{
                         if(ssids[i].contentEquals(wh[15])&&set[8]==1) {                                //appliedScience
                             if(set[9]==0)
                             {
-                                TextView tv = new TextView(WifiSearcher.this);
-                                tv.setText("You have just unlocked a clue!!!check it now!!");
-                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                Dialog dialog = new Dialog(WifiSearcher.this);
                                 dialog.setTitle("Congrats!!!");
-                                dialog.setContentView(tv);
+                                dialog.setContentView(R.layout.dialoguebox);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.HpClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        set[9] = 1;
+                                        credits+=10;
+                                        editor.putInt("credits",credits);
+                                        editor.putInt("set9", set[9]);
+                                        editor.commit();
+
+                                        Intent x = new Intent("test.sharang.com.amazing.HpClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
                             }
-                            set[9] = 1;
-                            credits+=10;
-                            editor.putInt("credits",credits);
-                            editor.putInt("set9", set[9]);
-                            editor.commit();
 
                         }
                         else
                         if(ssids[i].contentEquals(wh[20])&&set[9]==1) {                             //s6
                             if(set[10]==0)
                             {
-                                TextView tv = new TextView(WifiSearcher.this);
-                                tv.setText("You have just unlocked a clue!!!check it now!!");
-                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                Dialog dialog = new Dialog(WifiSearcher.this);
                                 dialog.setTitle("Congrats!!!");
-                                dialog.setContentView(tv);
+                                dialog.setContentView(R.layout.dialoguebox);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.HpClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        set[10] = 1;
+                                        credits+=10;
+                                        editor.putInt("credits",credits);
+                                        editor.putInt("set10", set[10]);
+                                        editor.commit();
+
+                                        Intent x = new Intent("test.sharang.com.amazing.HpClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
                             }
-                            set[10] = 1;
-                            credits+=10;
-                            editor.putInt("credits",credits);
-                            editor.putInt("set10", set[10]);
-                            editor.commit();
 
                         }
                         else
                         if(ssids[i].contentEquals(wh[21])&&set[10]==1) {                        //serverroom
                             if(set[11]==0)
                             {
-                                TextView tv = new TextView(WifiSearcher.this);
-                                tv.setText("You have just unlocked a clue!!!check it now!!");
-                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                Dialog dialog = new Dialog(WifiSearcher.this);
                                 dialog.setTitle("Congrats!!!");
-                                dialog.setContentView(tv);
+                                dialog.setContentView(R.layout.dialoguebox);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.HpClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        set[11] = 1;
+                                        credits+=15;
+                                        editor.putInt("credits",credits);
+                                        editor.putInt("set11", set[11]);
+                                        editor.commit();
+
+                                        Intent x = new Intent("test.sharang.com.amazing.HpClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
                             }
-                            set[11] = 1;
-                            credits+=15;
-                            editor.putInt("credits",credits);
-                            editor.putInt("set11", set[11]);
-                            editor.commit();
 
                         }
                         else
                         if(ssids[i].contentEquals(wh[22])&&set[11]==1) {                         //asStaffroom
                             if(set[12]==0)
                             {
-                                TextView tv = new TextView(WifiSearcher.this);
-                                tv.setText("You have just unlocked a clue!!!check it now!!");
-                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                Dialog dialog = new Dialog(WifiSearcher.this);
                                 dialog.setTitle("Congrats!!!");
-                                dialog.setContentView(tv);
+                                dialog.setContentView(R.layout.dialoguebox);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.HpClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        set[12] = 1;
+                                        credits+=15;
+                                        editor.putInt("credits",credits);
+                                        editor.putInt("set12", set[12]);
+                                        editor.commit();
+
+                                        Intent x = new Intent("test.sharang.com.amazing.HpClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
                             }
-                            set[12] = 1;
-                            credits+=15;
-                            editor.putInt("credits",credits);
-                            editor.putInt("set12", set[12]);
-                            editor.commit();
+
 
                         }
                         else
                         if(ssids[i].contentEquals(wh[23])&&set[12]==1) {                              //ssbs
                             if(set[13]==0)
                             {
-                                TextView tv = new TextView(WifiSearcher.this);
-                                tv.setText("You have just unlocked a clue!!!check it now!!");
-                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                Dialog dialog = new Dialog(WifiSearcher.this);
                                 dialog.setTitle("Congrats!!!");
-                                dialog.setContentView(tv);
+                                dialog.setContentView(R.layout.dialoguebox);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.HpClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        set[13] = 1;
+                                        credits+=15;
+                                        editor.putInt("credits",credits);
+                                        editor.putInt("set13", set[13]);
+                                        editor.commit();
+
+                                        Intent x = new Intent("test.sharang.com.amazing.HpClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
                             }
-                            set[13] = 1;
-                            credits+=15;
-                            editor.putInt("credits",credits);
-                            editor.putInt("set13", set[13]);
-                            editor.commit();
 
                         }
 
@@ -821,15 +1012,21 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setContentView(R.layout.dialoguebox);
                                 dialog.show();
 
-                                set[0] = 1;
-                                editor.putInt("set0", set[0]);
-                                editor.commit();
-                                Intent x= new Intent("test.sharang.com.amazing.FdClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        set[0] = 1;
+                                        editor.putInt("set0", set[0]);
+                                        editor.commit();
+
+                                        Intent x = new Intent("test.sharang.com.amazing.FdClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
+
                             }
-
-
 
                         }
 
@@ -837,19 +1034,29 @@ public class WifiSearcher extends AppCompatActivity{
                         if(ssids[i].contentEquals(wh[1])&&set[0]==1){                                 //transportation
                             if(set[1]==0)
                             {
-                                TextView tv = new TextView(WifiSearcher.this);
-                                tv.setText("You have just unlocked a clue!!!check it now!!");
+
                                 Dialog dialog = new Dialog(WifiSearcher.this);
                                 dialog.setTitle("Congrats!!!");
-                                dialog.setContentView(tv);
+                                dialog.setContentView(R.layout.dialoguebox);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.FdClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
+
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        set[1]=1;
+                                        editor.putInt("set1", set[1]);
+                                        editor.commit();
+
+                                        Intent x = new Intent("test.sharang.com.amazing.FdClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
+
                             }
-                            set[1]=1;
-                            editor.putInt("set1", set[1]);
-                            editor.commit();
+
 
 
                         }
@@ -857,39 +1064,52 @@ public class WifiSearcher extends AppCompatActivity{
                         if(ssids[i].contentEquals(wh[4])&&set[1]==1) {                                //fluid mechaanics lab
                             if(set[2]==0)
                             {
-                                TextView tv = new TextView(WifiSearcher.this);
-                                tv.setText("You have just unlocked a clue!!!check it now!!");
-                                Dialog dialog =new Dialog(WifiSearcher.this);
+                                Dialog dialog = new Dialog(WifiSearcher.this);
                                 dialog.setTitle("Congrats!!!");
-                                dialog.setContentView(tv);
+                                dialog.setContentView(R.layout.dialoguebox);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.FdClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
-                            }
-                            set[2] = 1;
 
-                            editor.putInt("set2", set[2]);
-                            editor.commit();
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        set[2] = 1;
+                                        editor.putInt("set2", set[2]);
+                                        editor.commit();
+
+                                        Intent x = new Intent("test.sharang.com.amazing.FdClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
+                            }
 
                         }
                         else
                         if(ssids[i].contentEquals(wh[24])&&set[2]==1) {                             //enviornmentaleng
                             if(set[3]==0)
                             {
-                                TextView tv = new TextView(WifiSearcher.this);
-                                tv.setText("She is ok.....");
-                                Dialog dialog =new Dialog(WifiSearcher.this);
-                                dialog.setContentView(tv);
+                                Dialog dialog = new Dialog(WifiSearcher.this);
+                                dialog.setTitle("Congrats!!!");
+                                dialog.setContentView(R.layout.dialoguebox);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.FdClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
-                            }
-                            set[3] = 1;
-                            editor.putInt("set3", set[3]);
-                            editor.commit();
 
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        set[3] = 1;
+                                        editor.putInt("set3", set[3]);
+                                        editor.commit();
+
+                                        Intent x = new Intent("test.sharang.com.amazing.FdClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
+                            }
 
                         }
 
@@ -902,14 +1122,22 @@ public class WifiSearcher extends AppCompatActivity{
                                 Dialog dialog =new Dialog(WifiSearcher.this);
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.FdClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
-                            }
-                            set[4] = 1;
 
-                            editor.putInt("set4", set[4]);
-                            editor.commit();
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        set[4] = 1;
+                                        editor.putInt("set4", set[4]);
+                                        editor.commit();
+
+                                        Intent x = new Intent("test.sharang.com.amazing.FdClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
+                            }
+
 
                         }
 
@@ -923,15 +1151,25 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.FdClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
+
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        set[5] = 1;
+                                        credits+=10;
+                                        editor.putInt("credits",credits);
+                                        editor.putInt("set5", set[5]);
+                                        editor.commit();
+
+                                        Intent x = new Intent("test.sharang.com.amazing.FdClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
                             }
-                            set[5] = 1;
-                            credits+=10;
-                            editor.putInt("credits",credits);
-                            editor.putInt("set5", set[5]);
-                            editor.commit();
+
 
                         }
                         else
@@ -944,15 +1182,24 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.FdClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        set[6] = 1;
+                                        credits+=10;
+                                        editor.putInt("credits",credits);
+                                        editor.putInt("set6", set[6]);
+                                        editor.commit();
+
+                                        Intent x = new Intent("test.sharang.com.amazing.FdClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
                             }
-                            set[6] = 1;
-                            credits+=10;
-                            editor.putInt("credits",credits);
-                            editor.putInt("set6", set[6]);
-                            editor.commit();
+
 
                         }
                         else
@@ -965,15 +1212,24 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.FdClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        set[7] = 1;
+                                        credits+=10;
+                                        editor.putInt("credits",credits);
+                                        editor.putInt("set7", set[7]);
+                                        editor.commit();;
+
+                                        Intent x = new Intent("test.sharang.com.amazing.FdClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
                             }
-                            set[7] = 1;
-                            credits+=10;
-                            editor.putInt("credits",credits);
-                            editor.putInt("set7", set[7]);
-                            editor.commit();
+
 
                         }
                         else
@@ -986,15 +1242,25 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.FdClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        set[8] = 1;
+                                        credits+=10;
+                                        editor.putInt("credits",credits);
+                                        editor.putInt("set8", set[8]);
+                                        editor.commit();
+
+
+                                        Intent x = new Intent("test.sharang.com.amazing.FdClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
                             }
-                            set[8] = 1;
-                            credits+=10;
-                            editor.putInt("credits",credits);
-                            editor.putInt("set8", set[8]);
-                            editor.commit();
+
 
                         }
 
@@ -1005,18 +1271,28 @@ public class WifiSearcher extends AppCompatActivity{
                                 TextView tv = new TextView(WifiSearcher.this);
                                 tv.setText("the coworker is shot just when you arrive...!!");
                                 Dialog dialog =new Dialog(WifiSearcher.this);
-                                dialog.setTitle("ooh no!!Just a little earlier!!");
+                                dialog.setTitle("ooh shoot!!Just a little earlier!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.FdClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        set[9] = 1;
+                                        credits+=10;
+                                        editor.putInt("credits",credits);
+                                        editor.putInt("set9", set[9]);
+                                        editor.commit();
+
+
+                                        Intent x = new Intent("test.sharang.com.amazing.FdClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
                             }
-                            set[9] = 1;
-                            credits+=10;
-                            editor.putInt("credits",credits);
-                            editor.putInt("set9", set[9]);
-                            editor.commit();
+
 
                         }
                         else
@@ -1029,15 +1305,25 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("noo!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.FdClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        set[10] = 1;
+                                        credits+=10;
+                                        editor.putInt("credits",credits);
+                                        editor.putInt("set10", set[10]);
+                                        editor.commit();
+
+
+                                        Intent x = new Intent("test.sharang.com.amazing.FdClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
                             }
-                            set[10] = 1;
-                            credits+=10;
-                            editor.putInt("credits",credits);
-                            editor.putInt("set10", set[10]);
-                            editor.commit();
+
 
                         }
                         else
@@ -1050,15 +1336,24 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Damn!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.FdClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        set[11] = 1;
+                                        credits+=15;
+                                        editor.putInt("credits",credits);
+                                        editor.putInt("set11", set[11]);
+                                        editor.commit();
+
+
+                                        Intent x = new Intent("test.sharang.com.amazing.FdClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
                             }
-                            set[11] = 1;
-                            credits+=15;
-                            editor.putInt("credits",credits);
-                            editor.putInt("set11", set[11]);
-                            editor.commit();
 
                         }
                         else
@@ -1071,15 +1366,24 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.FdClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        set[12] = 1;
+                                        credits+=15;
+                                        editor.putInt("credits",credits);
+                                        editor.putInt("set12", set[12]);
+                                        editor.commit();
+
+                                        Intent x = new Intent("test.sharang.com.amazing.FdClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
                             }
-                            set[12] = 1;
-                            credits+=15;
-                            editor.putInt("credits",credits);
-                            editor.putInt("set12", set[12]);
-                            editor.commit();
+
 
                         }
                         else
@@ -1092,15 +1396,24 @@ public class WifiSearcher extends AppCompatActivity{
                                 dialog.setTitle("Congrats!!!");
                                 dialog.setContentView(tv);
                                 dialog.show();
-                                Intent x= new Intent("test.sharang.com.amazing.FdClue");
-                                x.putExtra("cluearray",set);
-                                startActivity(x);
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        set[13] = 1;
+                                        credits+=15;
+                                        editor.putInt("credits",credits);
+                                        editor.putInt("set13", set[13]);
+                                        editor.commit();
+
+                                        Intent x = new Intent("test.sharang.com.amazing.FdClue");
+                                        x.putExtra("cluearray", set);
+                                        startActivity(x);
+                                    }
+                                }, 2000);
                             }
-                            set[13] = 1;
-                            credits+=15;
-                            editor.putInt("credits",credits);
-                            editor.putInt("set13", set[13]);
-                            editor.commit();
+
 
                         }
 
